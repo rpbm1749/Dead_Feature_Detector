@@ -1,0 +1,19 @@
+# ninja log v7
+8	1678	8014444956064484	CMakeFiles/dfd.dir/src/traversal/traversal.cpp.obj	bfeb79d03c27af65
+35	4005	8014444956344318	CMakeFiles/dfd.dir/src/source_parser/source_parser.cpp.obj	a8631abf93fbcaf1
+24	1427	8014445869238683	CMakeFiles/dfd.dir/src/cmake_parser/add_definitions.cpp.obj	ea792f05050654c4
+7	1578	8014445869068639	CMakeFiles/dfd.dir/src/main.cpp.obj	f4a9ffd9849800ba
+33	1914	8014445869328640	CMakeFiles/dfd.dir/src/cmake_parser/variable_parser.cpp.obj	77129d51a66667d9
+42	4980	8014445869418651	CMakeFiles/dfd.dir/src/source_parser/source_parser.cpp.obj	a8631abf93fbcaf1
+23	1428	8014446123482545	CMakeFiles/dfd.dir/src/cmake_parser/add_definitions.cpp.obj	ea792f05050654c4
+6	1648	8014446123303831	CMakeFiles/dfd.dir/src/main.cpp.obj	f4a9ffd9849800ba
+32	1815	8014446123567564	CMakeFiles/dfd.dir/src/cmake_parser/variable_parser.cpp.obj	77129d51a66667d9
+15	5121	8014446123402605	CMakeFiles/dfd.dir/src/cmake_parser/cmake_parser.cpp.obj	767064d8b9bd88e8
+41	5219	8014446123667599	CMakeFiles/dfd.dir/src/source_parser/source_parser.cpp.obj	a8631abf93fbcaf1
+5219	5547	8014446175441139	dfd.exe	cef6a3fff0d0bcbd
+21	1214	8014446422703988	CMakeFiles/dfd.dir/src/cmake_parser/add_definitions.cpp.obj	ea792f05050654c4
+5	1336	8014446422543912	CMakeFiles/dfd.dir/src/main.cpp.obj	f4a9ffd9849800ba
+28	1575	8014446422773965	CMakeFiles/dfd.dir/src/cmake_parser/variable_parser.cpp.obj	77129d51a66667d9
+14	4882	8014446422633924	CMakeFiles/dfd.dir/src/cmake_parser/cmake_parser.cpp.obj	767064d8b9bd88e8
+35	4896	8014446422843983	CMakeFiles/dfd.dir/src/source_parser/source_parser.cpp.obj	a8631abf93fbcaf1
+4897	5229	8014446471455726	dfd.exe	cef6a3fff0d0bcbd
