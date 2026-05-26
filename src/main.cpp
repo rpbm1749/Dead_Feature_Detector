@@ -36,6 +36,34 @@ static void dump_project_data(const ProjectData& data) {
                   << ref.macro_name
                   << " (span: " << ref.span_lines << " lines)\n";
     }
+
+    std::cout << "\n=== TARGET DEFINITIONS ===\n";
+    for (const auto& def : data.target_definitions) {
+        std::cout << "  [" << def.file_path << ":" << def.line << "] "
+                << def.target_name << " (" << def.visibility << ") "
+                << def.macro_name;
+        if (def.value)            std::cout << " = " << *def.value;
+        if (def.needs_resolution) std::cout << " [UNRESOLVED]";
+        std::cout << "\n";
+    }
+
+    std::cout << "\n=== UNKNOWN TARGETS ===\n";
+    for (const auto& ref : data.unknown_target_refs) {
+        std::cout << "  [" << ref.file_path << ":" << ref.line << "] "
+                << ref.target_name << "\n";
+    }
+
+    std::cout << "\n=== KNOWN TARGETS ===\n";
+    for (const auto& [name, target] : data.target_map) {
+        std::cout << "  " << name << " (";
+        switch (target.type) {
+            case TargetType::Executable:        std::cout << "executable"; break;
+            case TargetType::Library:           std::cout << "library";    break;
+            case TargetType::InterfaceLibrary:  std::cout << "interface";  break;
+            case TargetType::Unknown:           std::cout << "unknown";    break;
+        }
+        std::cout << ") [" << target.file_path << ":" << target.line << "]\n";
+    }
 }
 
 int main(int argc, char* argv[]) {

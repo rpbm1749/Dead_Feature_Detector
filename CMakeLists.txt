@@ -10,6 +10,7 @@ add_executable(dfd
     src/cmake_parser/cmake_parser.cpp
     src/cmake_parser/add_definitions.cpp
     src/cmake_parser/variable_parser.cpp
+    src/cmake_parser/target_parser.cpp
     src/source_parser/source_parser.cpp
 )
 

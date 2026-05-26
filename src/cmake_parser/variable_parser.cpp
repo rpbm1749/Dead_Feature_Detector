@@ -16,14 +16,21 @@ static std::vector<std::string> tokenize(const std::string& args_str) {
     std::string token;
 
     while (ss >> std::ws) {
+        if (ss.peek() == EOF) break;
+        
         if (ss.peek() == '"') {
-            // quoted string — read until closing quote
             std::string quoted;
             ss >> std::quoted(quoted);
-            tokens.push_back(quoted);
-        } else {
-            ss >> token;
-            tokens.push_back(token);
+            if (!quoted.empty()) {
+                tokens.push_back(quoted);
+            }
+            continue;    // ← this is the fix, go back to top of loop
+        }
+        
+        if (ss >> token) {
+            if (!token.empty()) {
+                tokens.push_back(token);
+            }
         }
     }
 
@@ -78,6 +85,14 @@ void process_variable_set(
 ) {
     auto tokens = tokenize(args);
     if (tokens.empty()) return;
+
+    // DEBUG: Print tokens
+    std::cerr << "[DEBUG set()] args=\"" << args << "\" tokens=[";
+    for (size_t i = 0; i < tokens.size(); ++i) {
+        if (i > 0) std::cerr << ", ";
+        std::cerr << "\"" << tokens[i] << "\"";
+    }
+    std::cerr << "]\n";
 
     const std::string& var_name = tokens[0];
     if (var_name.empty()) return;

@@ -1,7 +1,7 @@
 #include "cmake_parser.hpp"
 #include "add_definitions.hpp"
 #include "variable_parser.hpp"
-// #include "target_definitions.hpp"
+#include "target_parser.hpp"
 
 #include <fstream>
 #include <iostream>
@@ -18,7 +18,9 @@ enum class CallType {
     List,
     Option,
     TargetDefinitions,
-    Unknown
+    Unknown,
+    AddLibrary,
+    AddExecutable
 };
 
 static const std::unordered_map<std::string, CallType> keyword_map = {
@@ -28,6 +30,8 @@ static const std::unordered_map<std::string, CallType> keyword_map = {
     { "list",                       CallType::List           },
     { "option",                     CallType::Option         },
     { "target_compile_definitions", CallType::TargetDefinitions },
+    { "add_library",                CallType::AddLibrary        },
+    { "add_executable",             CallType::AddExecutable     }
 };
 
 // ─────────────────────────────────────────────
@@ -180,11 +184,26 @@ void parse_cmake_file(const std::string& file_path, ProjectData& data) {
                 process_option(args, file_path, start_line, data.variable_map);
                 break;
 
-            case CallType::TargetDefinitions:
-                // TODO: process_target_definitions(args, file_path, start_line, data)
+            case CallType::Unknown:
                 break;
 
-            case CallType::Unknown:
+            case CallType::AddLibrary:
+                process_add_library(args, file_path, start_line, data.target_map);
+                break;
+
+            case CallType::AddExecutable:
+                process_add_executable(args, file_path, start_line, data.target_map);
+                break;
+
+            case CallType::TargetDefinitions:
+                process_target_compile_definitions(
+                    args,
+                    file_path,
+                    start_line,
+                    data.target_map,
+                    data.target_definitions,
+                    data.unknown_target_refs
+                );
                 break;
         }
 

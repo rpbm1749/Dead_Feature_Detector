@@ -42,6 +42,7 @@ struct CMakeTargetDefinition {
     std::string visibility;     // PUBLIC, PRIVATE, INTERFACE
     std::string file_path;
     int line;
+    bool needs_resolution = false;  // whether the value contains unresolved variables
 };
 
 struct VariableValue {
@@ -59,6 +60,26 @@ struct CMakeVariable {
     bool is_cache = false;     // whether this variable was set with CACHE
     std::optional<std::string> cache_type;      // BOOL, STRING, PATH, FILEPATH
     std::optional<std::string> default_value;   // for option() defaults
+};
+
+enum class TargetType {
+    Executable,
+    Library,          // STATIC, SHARED, MODULE — all treated the same
+    InterfaceLibrary, // INTERFACE — propagates to consumers
+    Unknown           // target used in target_compile_definitions but never declared
+};
+
+struct CMakeTarget {
+    std::string name;
+    TargetType type;
+    std::string file_path;
+    int line;
+};
+
+struct UnknownTargetRef {
+    std::string target_name;
+    std::string file_path;
+    int line;
 };
 
 // ─────────────────────────────────────────────
@@ -125,6 +146,8 @@ struct ProjectData {
     std::vector<CMakeTargetDefinition>  target_definitions;
     std::vector<CMakeVariable>          cmake_variables;
     std::unordered_map<std::string, CMakeVariable> variable_map;  // variable name -> CMakeVariable
+    std::unordered_map<std::string, CMakeTarget> target_map;  //Target files
+    std::vector<UnknownTargetRef>       unknown_target_refs;
 
     // resolver output
     std::vector<UnresolvedRef>          unresolved_refs;
