@@ -134,6 +134,16 @@ struct MacroReport {
 };
 
 // ─────────────────────────────────────────────
+//  RESOLVER OUTPUT
+// ─────────────────────────────────────────────
+
+struct ResolvedData {
+    std::unordered_map<std::string, std::vector<MacroLocation>> defined_macros;      // macro_name -> all definition sites
+    std::unordered_map<std::string, std::vector<MacroLocation>> referenced_macros;   // macro_name -> all reference sites
+    std::vector<UnresolvedRef> unresolved;  // unresolvable variable references
+};
+
+// ─────────────────────────────────────────────
 //  TOP-LEVEL COLLECTED DATA
 //  This is what gets passed between pipeline stages
 // ─────────────────────────────────────────────

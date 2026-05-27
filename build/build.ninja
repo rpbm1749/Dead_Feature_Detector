@@ -93,6 +93,13 @@ build CMakeFiles/dfd.dir/src/source_parser/source_parser.cpp.obj: CXX_COMPILER__
   OBJECT_DIR = CMakeFiles\dfd.dir
   OBJECT_FILE_DIR = CMakeFiles\dfd.dir\src\source_parser
 
+build CMakeFiles/dfd.dir/src/resolver/resolver.cpp.obj: CXX_COMPILER__dfd_unscanned_ D$:/Projects_final/CDLabEL/Dead_Feature_Detector/src/resolver/resolver.cpp || cmake_object_order_depends_target_dfd
+  DEP_FILE = CMakeFiles\dfd.dir\src\resolver\resolver.cpp.obj.d
+  FLAGS = -std=gnu++17
+  INCLUDES = -ID:/Projects_final/CDLabEL/Dead_Feature_Detector/include -ID:/Projects_final/CDLabEL/Dead_Feature_Detector/src
+  OBJECT_DIR = CMakeFiles\dfd.dir
+  OBJECT_FILE_DIR = CMakeFiles\dfd.dir\src\resolver
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target dfd
@@ -101,7 +108,7 @@ build CMakeFiles/dfd.dir/src/source_parser/source_parser.cpp.obj: CXX_COMPILER__
 #############################################
 # Link the executable dfd.exe
 
-build dfd.exe: CXX_EXECUTABLE_LINKER__dfd_ CMakeFiles/dfd.dir/src/main.cpp.obj CMakeFiles/dfd.dir/src/traversal/traversal.cpp.obj CMakeFiles/dfd.dir/src/cmake_parser/cmake_parser.cpp.obj CMakeFiles/dfd.dir/src/cmake_parser/add_definitions.cpp.obj CMakeFiles/dfd.dir/src/cmake_parser/variable_parser.cpp.obj CMakeFiles/dfd.dir/src/cmake_parser/target_parser.cpp.obj CMakeFiles/dfd.dir/src/source_parser/source_parser.cpp.obj
+build dfd.exe: CXX_EXECUTABLE_LINKER__dfd_ CMakeFiles/dfd.dir/src/main.cpp.obj CMakeFiles/dfd.dir/src/traversal/traversal.cpp.obj CMakeFiles/dfd.dir/src/cmake_parser/cmake_parser.cpp.obj CMakeFiles/dfd.dir/src/cmake_parser/add_definitions.cpp.obj CMakeFiles/dfd.dir/src/cmake_parser/variable_parser.cpp.obj CMakeFiles/dfd.dir/src/cmake_parser/target_parser.cpp.obj CMakeFiles/dfd.dir/src/source_parser/source_parser.cpp.obj CMakeFiles/dfd.dir/src/resolver/resolver.cpp.obj
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\dfd.dir
   POST_BUILD = cd .

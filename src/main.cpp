@@ -5,9 +5,10 @@
 #include "cmake_parser/cmake_parser.hpp"
 #include "source_parser/source_parser.hpp"
 #include "../include/types.hpp"
+#include "resolver/resolver.hpp"
 
 // Temporary debug dump — will be replaced by the reporter later
-static void dump_project_data(const ProjectData& data) {
+static void dump_project_data(const ProjectData& data, const ResolvedData& resolved) {
     std::cout << "\n=== CMAKE DEFINITIONS ===\n";
     for (const auto& def : data.cmake_definitions) {
         std::cout << "  [" << def.file_path << ":" << def.line << "] "
@@ -64,7 +65,31 @@ static void dump_project_data(const ProjectData& data) {
         }
         std::cout << ") [" << target.file_path << ":" << target.line << "]\n";
     }
-}
+
+    std::cout << "\n=== RESOLVED DEFINED MACROS ===\n";
+    for (const auto& [name, locs] : resolved.defined_macros) {
+        std::cout << "  " << name << "\n";
+        for (const auto& loc : locs) {
+            std::cout << "    -> " << loc.file_path << ":" << loc.line;
+            if (loc.target_name) std::cout << " (target: " << *loc.target_name << ")";
+            std::cout << "\n";
+        }
+    }
+
+    std::cout << "\n=== RESOLVED REFERENCED MACROS ===\n";
+    for (const auto& [name, locs] : resolved.referenced_macros) {
+        std::cout << "  " << name << "\n";
+        for (const auto& loc : locs) {
+            std::cout << "    -> " << loc.file_path << ":" << loc.line << "\n";
+        }
+    }
+
+    std::cout << "\n=== UNRESOLVED ===\n";
+    for (const auto& ref : resolved.unresolved) {
+        std::cout << "  " << ref.expression
+                << " [" << ref.file_path << ":" << ref.line << "]\n";
+    }
+    }
 
 int main(int argc, char* argv[]) {
     if (argc < 2) {
@@ -97,9 +122,11 @@ int main(int argc, char* argv[]) {
             refs.begin(), refs.end()
         );
     }
+    std::cout << "[*] resolving...\n";
+    ResolvedData resolved = resolve(data);
 
     // dump everything for now
-    dump_project_data(data);
+    dump_project_data(data, resolved);
 
     return 0;
 }
